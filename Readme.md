@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Рахим Абдраев](https://up.htmlacademy.ru/javascript-individual/2/user/2290335).
-* Наставник: `Неизвестно`.
+* Наставник: [Александр Сударев](https://htmlacademy.ru/profile/id1152185).
 
 ---
 
@@ -12,7 +12,7 @@ _`.editorconfig`, `.eslintrc`, `.gitattributes`, `.gitignore`, `package-lock.jso
 
 [Как работать с Git на проекте](Contributing.md) | [Как работать над проектом](Workflow.md)
 
-### Памятка
+### Памятка!!!
 
 #### 1. Зарегистрируйтесь на Гитхабе
 
