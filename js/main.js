@@ -1,4 +1,3 @@
-const MIN_NUMBER_PHOTOS = 1;
 const MAX_NUMBER_PHOTOS = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
@@ -50,27 +49,23 @@ const giveMeOneOrTwoMessages = () => {
   return message;
 };
 
-const createComment = () => ({
-  id: getRandomInteger(MIN_COMMENTS, MAX_COMMENTS),
+const createComment = (id) => ({
+  id: id + 1,
   avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
   message: giveMeOneOrTwoMessages(),
   name: getRandomArrayElement(NAMES),
 });
 
-const similarComments = Array.from({length: getRandomInteger(MIN_COMMENTS, MAX_COMMENTS)}, createComment);
-console.log(similarComments);
+const similarComments = () => Array.from({length: getRandomInteger(MIN_COMMENTS, MAX_COMMENTS)}, (item, index) => createComment(index));
 
-const createPhoto = () => ({
-  id: getRandomInteger(MIN_NUMBER_PHOTOS, MAX_NUMBER_PHOTOS),
-  url: `photos/${this.id}.jpg`,
+const createPhoto = (id) => ({
+  id: id + 1,
+  url: `photos/${id + 1}.jpg`,
   description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
   likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
-  comments: similarComments
+  comments: similarComments()
 });
 
-const similarPhotos = Array.from({length: MAX_NUMBER_PHOTOS}, createPhoto);
+const similarPhotos = () => Array.from({length: MAX_NUMBER_PHOTOS}, (item, index) => createPhoto(index));
 
-console.log(similarPhotos);
-
-
-
+similarPhotos();
