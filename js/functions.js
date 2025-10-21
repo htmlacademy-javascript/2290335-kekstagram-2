@@ -62,5 +62,5 @@ const workHours = (start, end, meeting, durance) => {
   return false;
 };
 
-workHours('15:30', '18:00', '14:00', 60);
+workHours('09:00', '18:00', '14:00', 60);
 
