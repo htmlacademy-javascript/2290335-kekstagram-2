@@ -43,3 +43,24 @@ const extractNumber = (str) => {
 };
 
 extractNumber('1 кефир, 0.5 батона');
+
+const workHours = (start, end, meeting, durance) => {
+  const totalMinutes = [];
+
+  [start, end, meeting].map((incomeTime) => {
+    const arrayNum = incomeTime.split(':').map((item) => Number(item));
+    totalMinutes.push(arrayNum[0] * 60 + arrayNum[1]);
+  });
+
+  const startMinutesWork = totalMinutes[0],
+    endMinutesWork = totalMinutes[1],
+    endMinutesMeeting = totalMinutes[2] + durance;
+
+  if (endMinutesMeeting > startMinutesWork && endMinutesMeeting < endMinutesWork) {
+    return true;
+  }
+  return false;
+};
+
+workHours('15:30', '18:00', '14:00', 60);
+
