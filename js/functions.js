@@ -1,9 +1,4 @@
-const isValidMaxLength = (str, length) => {
-  if (str.length <= length) {
-    return true;
-  }
-  return false;
-};
+const isValidMaxLength = (str, length) => str.length <= length;
 
 isValidMaxLength('dfdfdg', 6);
 
@@ -15,11 +10,9 @@ const isPalindrome = (str) => {
     result += normalizeStr[i];
   }
 
-  if (result === normalizeStr) {
-    return true;
-  }
-  return false;
+  return result === normalizeStr;
 };
+
 
 isPalindrome('Довод');
 
@@ -56,11 +49,8 @@ const workHours = (start, end, meeting, durance) => {
     endMinutesWork = totalMinutes[1],
     endMinutesMeeting = totalMinutes[2] + durance;
 
-  if (endMinutesMeeting > startMinutesWork && endMinutesMeeting < endMinutesWork) {
-    return true;
-  }
-  return false;
+  return endMinutesMeeting > startMinutesWork && endMinutesMeeting < endMinutesWork;
 };
 
-workHours('09:00', '18:00', '14:00', 60);
 
+workHours('09:00', '18:00', '14:00', 60);
