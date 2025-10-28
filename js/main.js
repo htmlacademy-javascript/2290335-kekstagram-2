@@ -1,3 +1,3 @@
-import { similarPhotos } from './creation_photos.js';
+import { renderPhotos } from './render.js';
 
-similarPhotos();
+renderPhotos();
