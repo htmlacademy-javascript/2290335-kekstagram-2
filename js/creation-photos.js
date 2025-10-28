@@ -1,5 +1,5 @@
 import { getRandomInteger, getRandomArrayElement } from './utils.js';
-import { similarComments } from './creation_comments.js';
+import { similarComments } from './creation-comments.js';
 
 const MAX_NUMBER_PHOTOS = 25;
 const MIN_LIKES = 15;
