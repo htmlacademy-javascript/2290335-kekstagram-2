@@ -1,12 +1,8 @@
-import { similarPhotos } from './creation_photos.js';
-
 const templatePhoto = document.querySelector('#picture').content.querySelector('.picture');
-const photosList = document.querySelector('.pictures');
+const photosListElement = document.querySelector('.pictures');
 const photosListFragment = document.createDocumentFragment();
 
-const photos = similarPhotos();
-
-const renderPhotos = () => {
+const renderPhotos = (photos) => {
   photos.forEach((photo) => {
     const element = templatePhoto.cloneNode(true);
     element.querySelector('.picture__img').src = photo.url;
@@ -17,7 +13,7 @@ const renderPhotos = () => {
     photosListFragment.append(element);
   });
 
-  photosList.append(photosListFragment);
+  photosListElement.append(photosListFragment);
 };
 
 export { renderPhotos };
