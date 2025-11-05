@@ -2,22 +2,15 @@ import { similarPhotos } from './creation-photos.js';
 import { renderPhotos } from './render.js';
 import { openBigPhoto } from './full-size-photo.js';
 
-// console.log(similarPhotos());
-renderPhotos(similarPhotos());
-const photos = similarPhotos();
-
 const picturesContainer = document.querySelector('.pictures');
-const pictures = picturesContainer.getElementsByClassName('picture');
+const thumbnails = picturesContainer.getElementsByClassName('picture');
 
-const onClickPhoto = (evt) => {
-  const target = evt.target;
-  if (target.matches('.picture__img')) {
-    openBigPhoto(photo);
-  }
+const photos = similarPhotos();
+renderPhotos(photos);
 
-  // console.log(evt.target.closest('.picture'));
+for (let i = 0; i < thumbnails.length; i++) {
+  thumbnails[i].addEventListener('click', () => {
+    openBigPhoto(photos[i]);
+  });
+}
 
-};
-
-
-document.addEventListener('click', onClickPhoto);

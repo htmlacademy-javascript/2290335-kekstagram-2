@@ -16,8 +16,4 @@ const renderPhotos = (photos) => {
   photosListElement.append(photosListFragment);
 };
 
-const clearPhotos = () => {
-  photosListElement.innerHTML = '';
-};
-
-export { renderPhotos, clearPhotos };
+export { renderPhotos };
