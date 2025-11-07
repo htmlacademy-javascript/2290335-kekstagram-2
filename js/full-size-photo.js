@@ -1,9 +1,11 @@
 import { isEscapeKey } from './utils.js';
+import { renderComments } from './full-size-render-comments.js';
 
-const bigPhotoMenu = document.querySelector('.big-picture');
-const commentsCounter = document.querySelector('.social__comment-count');
-const commentsLoader = document.querySelector('.comments-loader');
-const closeButton = bigPhotoMenu.querySelector('.big-picture__cancel');
+const bigPhotoMenuElement = document.querySelector('.big-picture');
+const closeButtonElement = bigPhotoMenuElement.querySelector('.big-picture__cancel');
+
+const commentsCounterElement = bigPhotoMenuElement.querySelector('.social__comment-count');
+const commentsLoaderElement = bigPhotoMenuElement.querySelector('.comments-loader');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -12,47 +14,25 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-const renderComments = (comments) => {
-  const commentsList = document.querySelector('.social__comments');
-  commentsList.innerHTML = '';
-
-  for (let i = 0; i < comments.length; i++) {
-    const comment = document.createElement('li');
-    comment.classList.add('social__comment');
-    comment.insertAdjacentHTML('beforeend', `
-    <img
-      class="social__picture"
-      src="${comments[i].avatar}"
-      alt="${comments[i].name}"
-      width="35" height="35">
-  <p class="social__text">${comments[i].message}</p>
-  `);
-    commentsList.append(comment);
-  }
-
-};
-
 function openBigPhoto (photo) {
-  bigPhotoMenu.classList.remove('hidden');
+  bigPhotoMenuElement.classList.remove('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
 
-  bigPhotoMenu.querySelector('img').src = photo.url;
-  bigPhotoMenu.querySelector('.likes-count').textContent = photo.likes;
-  bigPhotoMenu.querySelector('.social__caption').textContent = photo.description;
+  bigPhotoMenuElement.querySelector('img').src = photo.url;
+  bigPhotoMenuElement.querySelector('.likes-count').textContent = photo.likes;
+  bigPhotoMenuElement.querySelector('.social__caption').textContent = photo.description;
 
-  commentsCounter.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
+  commentsCounterElement.classList.add('hidden');
+  commentsLoaderElement.classList.add('hidden');
   renderComments(photo.comments);
-
 }
 
 function closeBigPhoto () {
-  bigPhotoMenu.classList.add('hidden');
+  bigPhotoMenuElement.classList.add('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-
-closeButton.addEventListener('click', closeBigPhoto);
+closeButtonElement.addEventListener('click', closeBigPhoto);
 
 export { openBigPhoto };
 
