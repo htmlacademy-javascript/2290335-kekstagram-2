@@ -8,8 +8,10 @@ const thumbnails = picturesElement.getElementsByClassName('picture');
 const photos = similarPhotos();
 renderPhotos(photos);
 
-for (let i = 0; i < thumbnails.length; i++) {
-  thumbnails[i].addEventListener('click', (event) => {
+const arrayOfThumbnails = Array.from(thumbnails);
+
+arrayOfThumbnails.forEach((thumbnail) => {
+  thumbnail.addEventListener('click', (event) => {
     event.preventDefault();
     const currentId = event.target.closest('.picture').id;
     const currentPhoto = photos.find(
@@ -17,5 +19,4 @@ for (let i = 0; i < thumbnails.length; i++) {
     );
     openBigPhoto(currentPhoto);
   });
-}
-
+});
