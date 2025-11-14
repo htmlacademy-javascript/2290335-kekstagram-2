@@ -1,6 +1,7 @@
 import { similarPhotos } from './creation-photos.js';
 import { renderPhotos } from './render.js';
 import { openBigPhoto } from './full-size-photo.js';
+import './user-form.js';
 
 const picturesElement = document.querySelector('.pictures');
 const thumbnails = picturesElement.getElementsByClassName('picture');
