@@ -1,7 +1,7 @@
-import '../vendor/pristine/pristine.min.js';
 import { isEscapeKey } from './utils.js';
 import { getErrorText, isHashtagsValid } from './validation-hashtags.js';
 import { isDescriptionValid, getErrorMessageDescription } from './validation-description.js';
+import { resetScale } from './scale.js';
 
 const imgUpload = document.querySelector('.img-upload');
 const imgUploadForm = imgUpload.querySelector('.img-upload__form');
@@ -35,12 +35,14 @@ function openModalMenu() {
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 }
+openModalMenu();
 
 function closeModalMenu() {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   resetInputValues();
   document.removeEventListener('keydown', onDocumentKeydown);
+  resetScale();
 }
 
 imgUploadInput.addEventListener('change', openModalMenu);
