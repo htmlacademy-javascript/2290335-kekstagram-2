@@ -2,6 +2,7 @@ import { isEscapeKey } from './utils.js';
 import { getErrorText, isHashtagsValid } from './validation-hashtags.js';
 import { isDescriptionValid, getErrorMessageDescription } from './validation-description.js';
 import { resetScale } from './scale.js';
+import { resetFilter } from './nouislider.js';
 
 const imgUpload = document.querySelector('.img-upload');
 const imgUploadForm = imgUpload.querySelector('.img-upload__form');
@@ -43,6 +44,7 @@ function closeModalMenu() {
   resetInputValues();
   document.removeEventListener('keydown', onDocumentKeydown);
   resetScale();
+  resetFilter();
 }
 
 imgUploadInput.addEventListener('change', openModalMenu);
@@ -50,3 +52,5 @@ imgUploadCancel.addEventListener('click', closeModalMenu);
 
 pristine.addValidator(descriptionElement, isDescriptionValid, getErrorMessageDescription, 2, false);
 pristine.addValidator(hashtagsElement, isHashtagsValid, getErrorText, 2, false);
+
+

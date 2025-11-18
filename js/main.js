@@ -2,7 +2,6 @@ import { similarPhotos } from './creation-photos.js';
 import { renderPhotos } from './render.js';
 import { openBigPhoto } from './full-size-photo.js';
 import './user-form.js';
-import './scale.js';
 
 const picturesElement = document.querySelector('.pictures');
 const thumbnails = picturesElement.getElementsByClassName('picture');
@@ -22,3 +21,4 @@ arrayOfThumbnails.forEach((thumbnail) => {
     openBigPhoto(currentPhoto);
   });
 });
+
