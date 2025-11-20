@@ -1,10 +1,12 @@
 import { similarPhotos } from './creation-photos.js';
 import { renderPhotos } from './render.js';
 import { openBigPhoto } from './full-size-photo.js';
-import './user-form.js';
+import { openModalMenu } from './user-form.js';
 
 const picturesElement = document.querySelector('.pictures');
 const thumbnails = picturesElement.getElementsByClassName('picture');
+const imgUploadForm = document.querySelector('.img-upload__form');
+const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 
 const photos = similarPhotos();
 renderPhotos(photos);
@@ -21,4 +23,6 @@ arrayOfThumbnails.forEach((thumbnail) => {
     openBigPhoto(currentPhoto);
   });
 });
+
+imgUploadInput.addEventListener('change', openModalMenu);
 
