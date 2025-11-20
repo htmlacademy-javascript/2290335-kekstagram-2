@@ -2,17 +2,15 @@ const SCALE_MAX = 100;
 const SCALE_MIN = 25;
 const SCALE_STEP = 25;
 
-const uploadForm = document.querySelector('.img-upload__form');
-const imgUploadPreviewImage = uploadForm.querySelector('.img-upload__preview img');
-const scaleControlSmaller = uploadForm.querySelector('.scale__control--smaller');
-const scaleControlBigger = uploadForm.querySelector('.scale__control--bigger');
-const scaleControlValue = uploadForm.querySelector('.scale__control--value');
+const imgUploadForm = document.querySelector('.img-upload__form');
+const scaleControlValue = imgUploadForm.querySelector('.scale__control--value');
+const previewImageElement = imgUploadForm.querySelector('.img-upload__preview img');
 
 let scale = 100;
 
 const changeScale = () => {
-  scaleControlValue.value = `${scale}%`;
-  imgUploadPreviewImage.style.transform = `scale(${scale / 100})`;
+  scaleControlValue.setAttribute('value', `${scale}%`);
+  previewImageElement.style.transform = `scale(${scale / 100})`;
 };
 
 const minusScale = () => {
@@ -34,7 +32,4 @@ const resetScale = () => {
   changeScale();
 };
 
-scaleControlSmaller.addEventListener('click', minusScale);
-scaleControlBigger.addEventListener('click', plusScale);
-
-export { resetScale };
+export { minusScale, plusScale, resetScale };
