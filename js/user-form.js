@@ -1,15 +1,21 @@
-import '../vendor/pristine/pristine.min.js';
 import { isEscapeKey } from './utils.js';
 import { getErrorText, isHashtagsValid } from './validation-hashtags.js';
 import { isDescriptionValid, getErrorMessageDescription } from './validation-description.js';
+import { minusScale, plusScale, resetScale } from './scale.js';
+import { onEffectRadioBtnClick, resetFilter } from './slider-effects.js';
 
-const imgUpload = document.querySelector('.img-upload');
-const imgUploadForm = imgUpload.querySelector('.img-upload__form');
-const imgUploadOverlay = imgUpload.querySelector('.img-upload__overlay');
-const imgUploadInput = imgUpload.querySelector('.img-upload__input');
-const imgUploadCancel = imgUpload.querySelector('.img-upload__cancel');
+const imgUploadForm = document.querySelector('.img-upload__form');
+const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
+const imgUploadCancel = imgUploadForm.querySelector('.img-upload__cancel');
 
-// Pristine. Валидация формы imgUploadForm
+// Масштабирование превью. Модуль scale.js в помощь
+const minusButtonElement = imgUploadForm.querySelector('.scale__control--smaller');
+const plusButtonElement = imgUploadForm.querySelector('.scale__control--bigger');
+
+// Слайдер. Модуль slider.js в помощь
+const listElement = imgUploadForm.querySelector('.effects__list');
+
+// Валидация формы imgUploadForm средствами модулей validation-hashtags.js, validation-description.js
 const hashtagsElement = imgUploadForm.querySelector('.text__hashtags');
 const descriptionElement = imgUploadForm.querySelector('.text__description');
 
@@ -27,7 +33,7 @@ const onDocumentKeydown = (evt) => {
 };
 
 const resetInputValues = () => {
-  imgUploadInput.value = '';
+  imgUploadForm.reset();
 };
 
 function openModalMenu() {
@@ -41,10 +47,16 @@ function closeModalMenu() {
   document.body.classList.remove('modal-open');
   resetInputValues();
   document.removeEventListener('keydown', onDocumentKeydown);
+  resetScale();
+  resetFilter();
 }
 
-imgUploadInput.addEventListener('change', openModalMenu);
 imgUploadCancel.addEventListener('click', closeModalMenu);
+minusButtonElement.addEventListener('click', minusScale);
+plusButtonElement.addEventListener('click', plusScale);
+listElement.addEventListener('change', onEffectRadioBtnClick);
 
 pristine.addValidator(descriptionElement, isDescriptionValid, getErrorMessageDescription, 2, false);
 pristine.addValidator(hashtagsElement, isHashtagsValid, getErrorText, 2, false);
+
+export { openModalMenu };
