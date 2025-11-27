@@ -9,6 +9,7 @@ const commentsListFragment = document.createDocumentFragment();
 const commentsLoaderElement = bigPhotoMenuElement.querySelector('.comments-loader');
 const commentsCounterElement = bigPhotoMenuElement.querySelector('.social__comment-shown-count');
 const commentsTotalElement = bigPhotoMenuElement.querySelector('.social__comment-total-count');
+const thumbnails = document.getElementsByClassName('picture');
 let visibleComments = 5;
 let comments = [];
 
@@ -80,7 +81,21 @@ function closeBigPhoto () {
   resetNumberVisibleComments();
 }
 
+const onThumbnailClick = (pictures) => {
+  const arrayOfThumbnails = Array.from(thumbnails);
+  arrayOfThumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener('click', (event) => {
+      event.preventDefault();
+      const currentId = event.target.closest('.picture').id;
+      const currentPhoto = pictures.find(
+        (item) => String(item.id) === String(currentId)
+      );
+      openBigPhoto(currentPhoto);
+    });
+  });
+};
+
 closeButtonElement.addEventListener('click', closeBigPhoto);
 
-export { openBigPhoto };
+export { onThumbnailClick };
 

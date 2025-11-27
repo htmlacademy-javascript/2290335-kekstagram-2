@@ -1,20 +1,8 @@
-const popularSortButton = document.querySelector('#filter-discussed');
-const defaultSortButton = document.querySelector('#filter-default');
-const randomSortButton = document.querySelector('#filter-random');
-
-const setDefaultClick = (cb) => {
-  defaultSortButton.addEventListener('click', () => {
-    cb();
-  });
-};
-
-const comparePopular = (itemA, itemB) => itemB.likes - itemA.likes;
-
-const setPopularClick = (cb) => {
-  popularSortButton.addEventListener('click', () => {
-    cb();
-  });
-};
+const filtersContainerElement = document.querySelector('.img-filters');
+const popularSortButtonElement = filtersContainerElement.querySelector('#filter-discussed');
+const defaultSortButtonElement = filtersContainerElement.querySelector('#filter-default');
+const randomSortButtonElement = filtersContainerElement.querySelector('#filter-random');
+const sortButtonsElements = filtersContainerElement.querySelectorAll('.img-filters__button');
 
 const shuffle = (arr) => {
   const newArr = [...arr];
@@ -25,11 +13,41 @@ const shuffle = (arr) => {
   return newArr;
 };
 
+const comparePopular = (itemA, itemB) => itemB.likes - itemA.likes;
 
-const setRandomClick = (cb) => {
-  randomSortButton.addEventListener('click', () => {
+const resetFilters = () => {
+  const sortButtons = Array.from(sortButtonsElements);
+  sortButtons.forEach((sortButton) => {
+    sortButton.classList.remove('img-filters__button--active');
+  });
+};
+
+const showFilters = () => {
+  filtersContainerElement.classList.remove('img-filters--inactive');
+};
+
+const setDefaultClick = (cb) => {
+  defaultSortButtonElement.addEventListener('click', () => {
+    resetFilters();
+    defaultSortButtonElement.classList.add('img-filters__button--active');
     cb();
   });
 };
 
-export { setDefaultClick, comparePopular, setPopularClick, setRandomClick, shuffle };
+const setPopularClick = (cb) => {
+  popularSortButtonElement.addEventListener('click', () => {
+    resetFilters();
+    popularSortButtonElement.classList.add('img-filters__button--active');
+    cb();
+  });
+};
+
+const setRandomClick = (cb) => {
+  randomSortButtonElement.addEventListener('click', () => {
+    resetFilters();
+    randomSortButtonElement.classList.add('img-filters__button--active');
+    cb();
+  });
+};
+
+export { showFilters, setDefaultClick, comparePopular, setPopularClick, setRandomClick, shuffle };
