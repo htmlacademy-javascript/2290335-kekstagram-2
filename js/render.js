@@ -3,6 +3,8 @@ const templatePhoto = document.querySelector('#picture').content.querySelector('
 const photosListFragment = document.createDocumentFragment();
 
 const renderPhotos = (photos) => {
+  photosListElement.innerHTML = '';
+
   photos.forEach((photo) => {
     const element = templatePhoto.cloneNode(true);
     element.id = photo.id;

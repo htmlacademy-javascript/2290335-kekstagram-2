@@ -1,14 +1,18 @@
 
 import { getData } from './api.js';
-import { showAlert } from './utils.js';
+import { showAlert, debounce } from './utils.js';
 import { renderPhotos } from './render.js';
 import { openBigPhoto } from './full-size-photo.js';
 import { openModalMenu, setUserFormSubmit } from './user-form.js';
+import { setDefaultClick, comparePopular, setPopularClick, setRandomClick, shuffle } from './sort.js';
+
+const NUMBER_PHOTOS_RANDOM = 10;
+const RERENDER_DELAY = 500;
 
 const thumbnails = document.getElementsByClassName('picture');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
-
+const filterBar = document.querySelector('.img-filters');
 
 getData()
   .then((photos) => {
@@ -24,6 +28,23 @@ getData()
         openBigPhoto(currentPhoto);
       });
     });
+    filterBar.classList.remove('img-filters--inactive');
+
+    setDefaultClick(debounce(
+      () => renderPhotos(photos)),
+    RERENDER_DELAY);
+
+    const photosCopyPopular = photos.slice().sort(comparePopular);
+    setPopularClick(debounce(
+      () => renderPhotos(photosCopyPopular)),
+    RERENDER_DELAY);
+
+    setRandomClick(debounce(
+      () => {
+        const photosCopyRandom = shuffle(photos.slice()).slice(0, NUMBER_PHOTOS_RANDOM);
+        renderPhotos(photosCopyRandom);
+      }, RERENDER_DELAY)
+    );
   })
   .catch(
     (err) => {
