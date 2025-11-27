@@ -2,8 +2,14 @@ const photosListElement = document.querySelector('.pictures');
 const templatePhoto = document.querySelector('#picture').content.querySelector('.picture');
 const photosListFragment = document.createDocumentFragment();
 
+const deletePhotos = () => {
+  const pictures = photosListElement.getElementsByClassName('picture');
+  const picturesArray = Array.from(pictures);
+  picturesArray.forEach((picture) => picture.remove());
+};
+
 const renderPhotos = (photos) => {
-  photosListElement.innerHTML = '';
+  deletePhotos();
 
   photos.forEach((photo) => {
     const element = templatePhoto.cloneNode(true);

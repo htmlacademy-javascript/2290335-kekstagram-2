@@ -5,14 +5,15 @@ import { renderPhotos } from './render.js';
 import { openBigPhoto } from './full-size-photo.js';
 import { openModalMenu, setUserFormSubmit } from './user-form.js';
 import { setDefaultClick, comparePopular, setPopularClick, setRandomClick, shuffle } from './sort.js';
+import { getPreview } from './avatar.js';
 
 const NUMBER_PHOTOS_RANDOM = 10;
 const RERENDER_DELAY = 500;
 
 const thumbnails = document.getElementsByClassName('picture');
-const imgUploadForm = document.querySelector('.img-upload__form');
-const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
-const filterBar = document.querySelector('.img-filters');
+const uploadFormElement = document.querySelector('.img-upload__form');
+const uloadInputElement = uploadFormElement.querySelector('.img-upload__input');
+const imgFiltersElement = document.querySelector('.img-filters');
 
 getData()
   .then((photos) => {
@@ -28,7 +29,7 @@ getData()
         openBigPhoto(currentPhoto);
       });
     });
-    filterBar.classList.remove('img-filters--inactive');
+    imgFiltersElement.classList.remove('img-filters--inactive');
 
     setDefaultClick(debounce(
       () => renderPhotos(photos)),
@@ -53,6 +54,7 @@ getData()
   );
 
 setUserFormSubmit();
+getPreview();
 
-imgUploadInput.addEventListener('change', openModalMenu);
+uloadInputElement.addEventListener('change', openModalMenu);
 
