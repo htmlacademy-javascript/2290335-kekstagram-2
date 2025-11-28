@@ -1,10 +1,15 @@
-const filtersContainerElement = document.querySelector('.img-filters');
-const popularSortButtonElement = filtersContainerElement.querySelector('#filter-discussed');
-const defaultSortButtonElement = filtersContainerElement.querySelector('#filter-default');
-const randomSortButtonElement = filtersContainerElement.querySelector('#filter-random');
-const sortButtonsElements = filtersContainerElement.querySelectorAll('.img-filters__button');
+// import { debounce } from './utils.js';
 
-const shuffle = (arr) => {
+// const RERENDER_DELAY = 2000;
+const NUMBER_PHOTOS_RANDOM = 10;
+
+const filtersContainerElement = document.querySelector('.img-filters');
+const filtersFormElement = filtersContainerElement.querySelector('.img-filters__form');
+const sortButtonsElements = filtersFormElement.querySelectorAll('.img-filters__button');
+
+const comparePopular = (itemA, itemB) => itemB.likes - itemA.likes;
+
+const shuffleArray = (arr) => {
   const newArr = [...arr];
   for (let i = newArr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -13,7 +18,9 @@ const shuffle = (arr) => {
   return newArr;
 };
 
-const comparePopular = (itemA, itemB) => itemB.likes - itemA.likes;
+const showFilters = () => {
+  filtersContainerElement.classList.remove('img-filters--inactive');
+};
 
 const resetFilters = () => {
   const sortButtons = Array.from(sortButtonsElements);
@@ -22,32 +29,29 @@ const resetFilters = () => {
   });
 };
 
-const showFilters = () => {
-  filtersContainerElement.classList.remove('img-filters--inactive');
-};
-
-const setDefaultClick = (cb) => {
-  defaultSortButtonElement.addEventListener('click', () => {
+const setFilterClick = (data, getRenderPhotos, getBigPhoto) => {
+  filtersFormElement.addEventListener('click', (event) => {
     resetFilters();
-    defaultSortButtonElement.classList.add('img-filters__button--active');
-    cb();
+    const target = event.target;
+    target.classList.add('img-filters__button--active');
+
+    const photosCopyPopular = data.slice().sort(comparePopular);
+    const photosCopyRandom = shuffleArray(data.slice()).slice(0, NUMBER_PHOTOS_RANDOM);
+    let array = [];
+    if (target.matches('#filter-discussed')) {
+      array = photosCopyPopular;
+    }
+
+    if (target.matches('#filter-random')) {
+      array = photosCopyRandom;
+    }
+
+    if (target.matches('#filter-default')) {
+      array = data;
+    }
+    getRenderPhotos(array);
+    getBigPhoto(array);
   });
 };
 
-const setPopularClick = (cb) => {
-  popularSortButtonElement.addEventListener('click', () => {
-    resetFilters();
-    popularSortButtonElement.classList.add('img-filters__button--active');
-    cb();
-  });
-};
-
-const setRandomClick = (cb) => {
-  randomSortButtonElement.addEventListener('click', () => {
-    resetFilters();
-    randomSortButtonElement.classList.add('img-filters__button--active');
-    cb();
-  });
-};
-
-export { showFilters, setDefaultClick, comparePopular, setPopularClick, setRandomClick, shuffle };
+export { showFilters, setFilterClick };
