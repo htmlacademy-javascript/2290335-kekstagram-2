@@ -37,7 +37,7 @@ const onEffectRadioBtnClick = (evt) => {
   const currentRadioBtn = evt.target.closest('.effects__radio');
   if (currentRadioBtn) {
     const effectBtnValue = currentRadioBtn.value;
-    imgPreview.classList.replace(selectorImg, getEffectSelector(effectBtnValue));
+    imgPreview.classList.replace(selectorImg, getEffectSelector(`effect-${effectBtnValue}`));
     getUpdateSliderOptions(effectBtnValue, sliderElement);
   }
 };

@@ -32,7 +32,9 @@ const pristine = new Pristine(imgUploadForm, {
 });
 
 const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) &&
+  !evt.target.classList.contains('text__hashtags') &&
+  !evt.target.classList.contains('text__description')) {
     evt.preventDefault();
     closeModalMenu();
   }

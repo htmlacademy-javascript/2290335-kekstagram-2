@@ -1,22 +1,15 @@
-const popularSortButton = document.querySelector('#filter-discussed');
-const defaultSortButton = document.querySelector('#filter-default');
-const randomSortButton = document.querySelector('#filter-random');
+// import { debounce } from './utils.js';
 
-const setDefaultClick = (cb) => {
-  defaultSortButton.addEventListener('click', () => {
-    cb();
-  });
-};
+// const RERENDER_DELAY = 2000;
+const NUMBER_PHOTOS_RANDOM = 10;
+
+const filtersContainerElement = document.querySelector('.img-filters');
+const filtersFormElement = filtersContainerElement.querySelector('.img-filters__form');
+const sortButtonsElements = filtersFormElement.querySelectorAll('.img-filters__button');
 
 const comparePopular = (itemA, itemB) => itemB.likes - itemA.likes;
 
-const setPopularClick = (cb) => {
-  popularSortButton.addEventListener('click', () => {
-    cb();
-  });
-};
-
-const shuffle = (arr) => {
+const shuffleArray = (arr) => {
   const newArr = [...arr];
   for (let i = newArr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -25,11 +18,40 @@ const shuffle = (arr) => {
   return newArr;
 };
 
+const showFilters = () => {
+  filtersContainerElement.classList.remove('img-filters--inactive');
+};
 
-const setRandomClick = (cb) => {
-  randomSortButton.addEventListener('click', () => {
-    cb();
+const resetFilters = () => {
+  const sortButtons = Array.from(sortButtonsElements);
+  sortButtons.forEach((sortButton) => {
+    sortButton.classList.remove('img-filters__button--active');
   });
 };
 
-export { setDefaultClick, comparePopular, setPopularClick, setRandomClick, shuffle };
+const setFilterClick = (data, getRenderPhotos, getBigPhoto) => {
+  filtersFormElement.addEventListener('click', (event) => {
+    resetFilters();
+    const target = event.target;
+    target.classList.add('img-filters__button--active');
+
+    const photosCopyPopular = data.slice().sort(comparePopular);
+    const photosCopyRandom = shuffleArray(data.slice()).slice(0, NUMBER_PHOTOS_RANDOM);
+    let array = [];
+    if (target.matches('#filter-discussed')) {
+      array = photosCopyPopular;
+    }
+
+    if (target.matches('#filter-random')) {
+      array = photosCopyRandom;
+    }
+
+    if (target.matches('#filter-default')) {
+      array = data;
+    }
+    getRenderPhotos(array);
+    getBigPhoto(array);
+  });
+};
+
+export { showFilters, setFilterClick };
