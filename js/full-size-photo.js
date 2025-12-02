@@ -9,6 +9,7 @@ const commentsListFragment = document.createDocumentFragment();
 const commentsLoaderElement = bigPhotoMenuElement.querySelector('.comments-loader');
 const commentsCounterElement = bigPhotoMenuElement.querySelector('.social__comment-shown-count');
 const commentsTotalElement = bigPhotoMenuElement.querySelector('.social__comment-total-count');
+const thumbnails = document.getElementsByClassName('picture');
 let visibleComments = 5;
 let comments = [];
 
@@ -63,6 +64,7 @@ const onCommentsLoaderAdd = () => {
 function openBigPhoto (photo) {
   comments = photo.comments;
   bigPhotoMenuElement.classList.remove('hidden');
+  document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 
   bigPhotoMenuElement.querySelector('img').src = photo.url;
@@ -75,12 +77,28 @@ function openBigPhoto (photo) {
 
 function closeBigPhoto () {
   bigPhotoMenuElement.classList.add('hidden');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   commentsLoaderElement.removeEventListener('click', onCommentsLoaderAdd);
   resetNumberVisibleComments();
 }
 
+// Открывает конкретную миниатюру
+const onThumbnailClick = (pictures) => {
+  const arrayOfThumbnails = Array.from(thumbnails);
+  arrayOfThumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener('click', (event) => {
+      event.preventDefault();
+      const currentId = event.target.closest('.picture').id;
+      const currentPhoto = pictures.find(
+        (item) => String(item.id) === String(currentId)
+      );
+      openBigPhoto(currentPhoto);
+    });
+  });
+};
+
 closeButtonElement.addEventListener('click', closeBigPhoto);
 
-export { openBigPhoto };
+export { onThumbnailClick };
 

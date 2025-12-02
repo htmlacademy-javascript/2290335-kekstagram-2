@@ -3,6 +3,14 @@ const sliderOptionsObjectChromeSepia = {
     min: 0,
     max: 1
   },
+  format: {
+    to: function (value) {
+      return value;
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
   start: 1,
   step: 0.1
 };
