@@ -1,13 +1,13 @@
-// import { debounce } from './utils.js';
+import { debounce } from './utils.js';
 
-// const RERENDER_DELAY = 2000;
+const RERENDER_DELAY = 500;
 const NUMBER_PHOTOS_RANDOM = 10;
 
 const filtersContainerElement = document.querySelector('.img-filters');
 const filtersFormElement = filtersContainerElement.querySelector('.img-filters__form');
 const sortButtonsElements = filtersFormElement.querySelectorAll('.img-filters__button');
 
-const comparePopular = (itemA, itemB) => itemB.likes - itemA.likes;
+const comparePopular = (itemA, itemB) => itemB.comments.length - itemA.comments.length;
 
 const shuffleArray = (arr) => {
   const newArr = [...arr];
@@ -29,7 +29,7 @@ const resetFilters = () => {
   });
 };
 
-const setFilterClick = (data, getRenderPhotos, getBigPhoto) => {
+const setFilterClick = (data, getRenderPhotos) => {
   filtersFormElement.addEventListener('click', (event) => {
     resetFilters();
     const target = event.target;
@@ -49,8 +49,7 @@ const setFilterClick = (data, getRenderPhotos, getBigPhoto) => {
     if (target.matches('#filter-default')) {
       array = data;
     }
-    getRenderPhotos(array);
-    getBigPhoto(array);
+    debounce(getRenderPhotos, RERENDER_DELAY)(array);
   });
 };
 

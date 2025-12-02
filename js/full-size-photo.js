@@ -64,6 +64,7 @@ const onCommentsLoaderAdd = () => {
 function openBigPhoto (photo) {
   comments = photo.comments;
   bigPhotoMenuElement.classList.remove('hidden');
+  document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 
   bigPhotoMenuElement.querySelector('img').src = photo.url;
@@ -76,6 +77,7 @@ function openBigPhoto (photo) {
 
 function closeBigPhoto () {
   bigPhotoMenuElement.classList.add('hidden');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   commentsLoaderElement.removeEventListener('click', onCommentsLoaderAdd);
   resetNumberVisibleComments();
