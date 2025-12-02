@@ -1,3 +1,5 @@
+import { onThumbnailClick } from './full-size-photo.js';
+
 const photosListElement = document.querySelector('.pictures');
 const templatePhoto = document.querySelector('#picture').content.querySelector('.picture');
 const photosListFragment = document.createDocumentFragment();
@@ -23,6 +25,7 @@ const renderPhotos = (photos) => {
   });
 
   photosListElement.append(photosListFragment);
+  onThumbnailClick(photos);
 };
 
 export { renderPhotos };

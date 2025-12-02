@@ -2,14 +2,13 @@ import { numDecline } from './utils.js';
 
 const MAX_HASHTAGS = 5;
 const MAX_SYMBOLS = 20;
+const REGEX = /^#[a-zа-яё0-9]{1,19}$/i;
 
 let errorHashtags = '';
-
 const getErrorText = () => errorHashtags;
 
 const isHashtagsValid = (value) => {
   errorHashtags = '';
-
   const inputText = value.toLowerCase().trim();
 
   if (inputText.length === 0) {
@@ -18,6 +17,10 @@ const isHashtagsValid = (value) => {
 
   const inputArray = inputText.split(/\s+/);
   const rules = [
+    {
+      check: inputArray.some((item) =>!REGEX.test(item)),
+      error: 'Хэштег содержит недопустимые символы'
+    },
     {
       check: inputArray.some((item) => item === '#'),
       error: 'Хэштег не может состоять из одной решетки'
@@ -42,15 +45,9 @@ const isHashtagsValid = (value) => {
       check: inputArray.length > MAX_HASHTAGS,
       error: `Нельзя указать больше ${MAX_HASHTAGS} ${numDecline(MAX_HASHTAGS, 'хэштега', 'хэштегов', 'хэштегов')}`
     },
-    {
-      check: inputArray.some((item) => /^#[a-zа-яё0-9]{1, 19}$/i.test(item)),
-      error: 'Хэштег содержит недопустимые символы'
-    }
   ];
-
   return rules.every((rule) => {
     const isInvalid = rule.check;
-
     if (isInvalid) {
       errorHashtags = rule.error;
     }
