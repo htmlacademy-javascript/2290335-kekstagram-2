@@ -2,9 +2,9 @@ const SCALE_MAX = 100;
 const SCALE_MIN = 25;
 const SCALE_STEP = 25;
 
-const imgUploadForm = document.querySelector('.img-upload__form');
-const scaleControlValue = imgUploadForm.querySelector('.scale__control--value');
-const previewImageElement = imgUploadForm.querySelector('.img-upload__preview img');
+const uploadFormElement = document.querySelector('.img-upload__form');
+const scaleControlValue = uploadFormElement.querySelector('.scale__control--value');
+const previewImageElement = uploadFormElement.querySelector('.img-upload__preview img');
 
 let scale = 100;
 

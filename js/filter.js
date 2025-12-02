@@ -1,6 +1,6 @@
 import { debounce } from './utils.js';
 
-const RERENDER_DELAY = 500;
+const RERENDER_DELAY = 700;
 const NUMBER_PHOTOS_RANDOM = 10;
 
 const filtersContainerElement = document.querySelector('.img-filters');

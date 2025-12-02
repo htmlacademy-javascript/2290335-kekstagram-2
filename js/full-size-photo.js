@@ -83,6 +83,7 @@ function closeBigPhoto () {
   resetNumberVisibleComments();
 }
 
+// Открывает конкретную миниатюру
 const onThumbnailClick = (pictures) => {
   const arrayOfThumbnails = Array.from(thumbnails);
   arrayOfThumbnails.forEach((thumbnail) => {

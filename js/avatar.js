@@ -1,9 +1,9 @@
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
-const imgUploadForm = document.querySelector('.img-upload__form');
-const fileChooser = imgUploadForm.querySelector('.img-upload__input');
-const preview = imgUploadForm.querySelector('.img-upload__preview img');
-const miniScreens = imgUploadForm.querySelectorAll('.effects__preview');
+const uploadFormElement = document.querySelector('.img-upload__form');
+const fileChooserElement = uploadFormElement.querySelector('.img-upload__input');
+const previewElement = uploadFormElement.querySelector('.img-upload__preview img');
+const miniScreens = uploadFormElement.querySelectorAll('.effects__preview');
 
 
 const refreshMiniPictures = (loadFile) => {
@@ -14,14 +14,14 @@ const refreshMiniPictures = (loadFile) => {
 };
 
 const getPreview = () => {
-  fileChooser.addEventListener('change', () => {
-    const file = fileChooser.files[0];
+  fileChooserElement.addEventListener('change', () => {
+    const file = fileChooserElement.files[0];
     const fileName = file.name.toLowerCase();
 
     const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
     if (matches) {
-      preview.src = URL.createObjectURL(file);
+      previewElement.src = URL.createObjectURL(file);
       refreshMiniPictures(file);
     }
   });

@@ -1,8 +1,8 @@
 import { getData } from './api.js';
 import { showAlert } from './utils.js';
 import { renderPhotos } from './render.js';
-import { openModalMenu, setUserFormSubmit } from './user-form.js';
-import { showFilters, setFilterClick } from './sort.js';
+import { openModalMenu, setFormSubmit } from './user-form.js';
+import { showFilters, setFilterClick } from './filter.js';
 import { getPreview } from './avatar.js';
 
 const uloadInputElement = document.querySelector('.img-upload__input');
@@ -23,7 +23,7 @@ getData()
     }
   );
 
-setUserFormSubmit();
+setFormSubmit();
 getPreview();
 
 uloadInputElement.addEventListener('change', openModalMenu);

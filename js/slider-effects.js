@@ -2,13 +2,13 @@ import { Effects, StyleFilterByEffects, getEffectSelector } from './slider-setti
 
 const EFFECT_LEVEL_MAX = 100;
 
-const imgUploadForm = document.querySelector('.img-upload__form');
-const sliderInputWrapperElement = imgUploadForm.querySelector('.img-upload__effect-level');
-const levelInputElement = imgUploadForm.querySelector('.effect-level__value');
-const sliderElement = imgUploadForm.querySelector('.effect-level__slider');
-const effectRadioBtnsElements = imgUploadForm.querySelectorAll('.effects__radio');
+const uploadFormElement = document.querySelector('.img-upload__form');
+const sliderInputWrapperElement = uploadFormElement.querySelector('.img-upload__effect-level');
+const levelInputElement = uploadFormElement.querySelector('.effect-level__value');
+const sliderElement = uploadFormElement.querySelector('.effect-level__slider');
+const effectRadioBtnsElements = uploadFormElement.querySelectorAll('.effects__radio');
 
-const imgPreview = imgUploadForm.querySelector('.img-upload__preview').firstElementChild;
+const imgPreview = uploadFormElement.querySelector('.img-upload__preview').firstElementChild;
 const selectorImg = imgPreview.classList;
 levelInputElement.value = EFFECT_LEVEL_MAX;
 
