@@ -1,8 +1,8 @@
 import { isEscapeKey } from './utils.js';
 import { getErrorText, isHashtagsValid } from './validation-hashtags.js';
 import { isDescriptionValid, getErrorMessageDescription } from './validation-description.js';
-import { resetValidationMessages, resetValidation } from './validation-reset.js';
-import { minusScale, plusScale, resetScale } from './scale.js';
+import { onValidationMessagesReset, resetValidation } from './validation-reset.js';
+import { onMinusButtonScale, onPlusButtonScale, resetScale } from './scale.js';
 import { onEffectRadioBtnClick, resetFilter } from './slider-effects.js';
 import { appendNotification } from './inform.js';
 import { sendData } from './api.js';
@@ -40,7 +40,7 @@ const onDocumentKeydown = (evt) => {
   !evt.target.classList.contains('text__hashtags') &&
   !evt.target.classList.contains('text__description')) {
     evt.preventDefault();
-    closeModalMenu();
+    onModalMenuClose();
   }
 };
 
@@ -58,19 +58,19 @@ const disableButton = () => {
   imgUploadButton.textContent = 'Публикую';
 };
 
-function openModalMenu() {
+function onModalMenuOpen() {
   imgUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-  textWrapperElement.addEventListener('input', resetValidationMessages);
+  textWrapperElement.addEventListener('input', onValidationMessagesReset);
 }
 
-function closeModalMenu() {
+function onModalMenuClose() {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   resetInputValues();
   document.removeEventListener('keydown', onDocumentKeydown);
-  textWrapperElement.removeEventListener('input', resetValidationMessages);
+  textWrapperElement.removeEventListener('input', onValidationMessagesReset);
   resetScale();
   resetFilter();
   pristine.reset();
@@ -88,7 +88,7 @@ const setFormSubmit = () => {
       sendData(new FormData(uploadFormElement))
         .then(() => {
           appendNotification(templateSuccess);
-          closeModalMenu();
+          onModalMenuClose();
         })
         .catch (
           () => {
@@ -102,13 +102,13 @@ const setFormSubmit = () => {
   });
 };
 
-imgUploadCancel.addEventListener('click', closeModalMenu);
-minusButtonElement.addEventListener('click', minusScale);
-plusButtonElement.addEventListener('click', plusScale);
+imgUploadCancel.addEventListener('click', onModalMenuClose);
+minusButtonElement.addEventListener('click', onMinusButtonScale);
+plusButtonElement.addEventListener('click', onPlusButtonScale);
 listElement.addEventListener('change', onEffectRadioBtnClick);
 
 pristine.addValidator(descriptionElement, isDescriptionValid, getErrorMessageDescription, 2, false);
 pristine.addValidator(hashtagsElement, isHashtagsValid, getErrorText, 2, false);
 
 
-export { openModalMenu, setFormSubmit };
+export { onModalMenuOpen, setFormSubmit };

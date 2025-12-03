@@ -13,14 +13,14 @@ const changeScale = () => {
   previewImageElement.style.transform = `scale(${scale / 100})`;
 };
 
-const minusScale = () => {
+const onMinusButtonScale = () => {
   if (scale > SCALE_MIN) {
     scale -= SCALE_STEP;
     changeScale();
   }
 };
 
-const plusScale = () => {
+const onPlusButtonScale = () => {
   if (scale < SCALE_MAX) {
     scale += SCALE_STEP;
     changeScale();
@@ -32,4 +32,4 @@ const resetScale = () => {
   changeScale();
 };
 
-export { minusScale, plusScale, resetScale };
+export { onMinusButtonScale, onPlusButtonScale, resetScale };

@@ -37,19 +37,19 @@ const setFilterClick = (data, getRenderPhotos) => {
 
     const photosCopyPopular = data.slice().sort(comparePopular);
     const photosCopyRandom = shuffleArray(data.slice()).slice(0, NUMBER_PHOTOS_RANDOM);
-    let array = [];
+    let sortedPhotos = [];
     if (target.matches('#filter-discussed')) {
-      array = photosCopyPopular;
+      sortedPhotos = photosCopyPopular;
     }
 
     if (target.matches('#filter-random')) {
-      array = photosCopyRandom;
+      sortedPhotos = photosCopyRandom;
     }
 
     if (target.matches('#filter-default')) {
-      array = data;
+      sortedPhotos = data;
     }
-    debounce(getRenderPhotos, RERENDER_DELAY)(array);
+    debounce(getRenderPhotos, RERENDER_DELAY)(sortedPhotos);
   });
 };
 

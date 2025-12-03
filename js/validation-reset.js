@@ -9,7 +9,7 @@ const resetValidation = () => {
   }
 };
 
-const resetValidationMessages = () => {
+const onValidationMessagesReset = () => {
   informWrappers.forEach((informField) => {
     const divWithTextElement = informField.children[1];
     if (informField.contains(divWithTextElement) && !informField.classList.contains('img-upload__field-wrapper--error')) {
@@ -22,4 +22,4 @@ const resetValidationMessages = () => {
 
 };
 
-export { resetValidationMessages, resetValidation };
+export { onValidationMessagesReset, resetValidation };
