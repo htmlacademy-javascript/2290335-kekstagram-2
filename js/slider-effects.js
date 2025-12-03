@@ -1,4 +1,4 @@
-import { Effects, StyleFilterByEffects, getEffectSelector } from './slider-settings.js';
+import { effects, StyleFilterByEffects, getEffectSelector } from './slider-settings.js';
 
 const EFFECT_LEVEL_MAX = 100;
 
@@ -13,7 +13,7 @@ const selectorImg = imgPreview.classList;
 levelInputElement.value = EFFECT_LEVEL_MAX;
 
 const getUpdateSliderOptions = (effect, slider) => {
-  slider.noUiSlider.updateOptions(Effects[effect]);
+  slider.noUiSlider.updateOptions(effects[effect]);
 };
 
 const resetFilter = () => {

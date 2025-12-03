@@ -16,7 +16,7 @@ let comments = [];
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeBigPhoto();
+    onBigPhotoClose();
   }
 };
 
@@ -75,7 +75,7 @@ function openBigPhoto (photo) {
   commentsLoaderElement.addEventListener('click', onCommentsLoaderAdd);
 }
 
-function closeBigPhoto () {
+function onBigPhotoClose () {
   bigPhotoMenuElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -98,7 +98,7 @@ const onThumbnailClick = (pictures) => {
   });
 };
 
-closeButtonElement.addEventListener('click', closeBigPhoto);
+closeButtonElement.addEventListener('click', onBigPhotoClose);
 
 export { onThumbnailClick };
 

@@ -1,7 +1,7 @@
 import { getData } from './api.js';
 import { showAlert } from './utils.js';
 import { renderPhotos } from './render.js';
-import { openModalMenu, setFormSubmit } from './user-form.js';
+import { onModalMenuOpen, setFormSubmit } from './user-form.js';
 import { showFilters, setFilterClick } from './filter.js';
 import { getPreview } from './avatar.js';
 
@@ -26,5 +26,5 @@ getData()
 setFormSubmit();
 getPreview();
 
-uloadInputElement.addEventListener('change', openModalMenu);
+uloadInputElement.addEventListener('change', onModalMenuOpen);
 
